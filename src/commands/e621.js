@@ -8,11 +8,11 @@ module.exports = {
 	.setDescription('Get posts from e621 or e926.')
 	.addUserOption(option => option.setName('tags').setDescription('Tags to search with'))
 	.addUserOption(option => option.setName('limit').setDescription('Amount of posts to return'))
-        .addUserOption(option => option.setName('NSFW').setDescription('whether to have NSFW ')),
+        .addUserOption(option => option.setName('nsfw').setDescription('whether to have NSFW ')),
 	async execute(interaction) {
 		const tags = interaction.options.getString('tags')
 		let limit = interaction.options.getInt('limit')
-		const nsfw = interaction.options.getBool('NSFW')
+		const nsfw = interaction.options.getBool('nsfw')
 		let eurl
 
 		if (nsfw){
