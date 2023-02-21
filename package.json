@@ -9,7 +9,7 @@
     "build": ""
   },
   "keywords": [],
-  "author": "",
+  "author": "KoolKreator, Criptc",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.7.1"
