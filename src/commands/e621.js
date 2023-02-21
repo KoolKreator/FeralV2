@@ -4,10 +4,10 @@ const limit_max = 320 // e621 max, should prob be lower
 
 module.exports = {
     data: new SlashCommandBuilder()
-		.setName('e621')
-		.setDescription('Get posts from e621 or e926.')
-		.addUserOption(option => option.setName('tags').setDescription('Tags to search with'))
-		.addUserOption(option => option.setName('limit').setDescription('Amount of posts to return'))
+	.setName('e621')
+	.setDescription('Get posts from e621 or e926.')
+	.addUserOption(option => option.setName('tags').setDescription('Tags to search with'))
+	.addUserOption(option => option.setName('limit').setDescription('Amount of posts to return'))
         .addUserOption(option => option.setName('NSFW').setDescription('whether to have NSFW ')),
 	async execute(interaction) {
 		const tags = interaction.options.getString('tags')
