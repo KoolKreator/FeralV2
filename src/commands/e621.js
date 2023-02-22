@@ -14,20 +14,6 @@ module.exports = {
 		const tags = interaction.options.getString('tags')
 		let limit = interaction.options.getNumber('limit')
 		const nsfw = interaction.options.getBoolean('adult')
-		const randomPost = interaction.options.getBoolean('randomize')
-
-		function getRandom(min, max) {
-			const floatRandom = Math.random();
-		  
-			const difference = max - min;
-		  
-			// random between 0 and the difference
-			const random = Math.round(difference * floatRandom);
-		  
-			const randomWithinRange = random + min;
-		  
-			return randomWithinRange;
-		}
 
 		if (nsfw){
 			eurl = "https://e621.net/posts"
@@ -54,12 +40,8 @@ module.exports = {
 		let result = await response.json();
 
 		if (result['posts'].length > 0){
-			if (randomPost){
-				let valuenum =  getRandom(0,result['posts'].length)
-				let value = result['posts'][valuenum]
-			}
 			for (const [key, value] of Object.entries(result['posts'])) {
-				await interaction.reply(`link: \`${eurl}/${value.id}\`\nrating: \`${value.rating}\`\nscore: \`${value.score.total}\`\n${value.file.url}`)
+				await interaction.reply(`Link: \`${eurl}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
 			}
 		}else{
 			await interaction.reply({ content: 'Sorry no results found for your query'})
