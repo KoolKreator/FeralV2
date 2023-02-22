@@ -7,8 +7,8 @@ module.exports = {
 	.setName('e621')
 	.setDescription('Get posts from e621 or e926.')
 	.addStringOption(option => option.setName('tags').setDescription('Tags to search with').setRequired(true))
-    .addNumberOption(option => option.setName('limit').setDescription('Amount of posts to return'))
-    .addBooleanOption(option => option.setName('adult').setDescription('Show adult rated post'))
+    	.addNumberOption(option => option.setName('limit').setDescription('Amount of posts to return'))
+    	.addBooleanOption(option => option.setName('adult').setDescription('Show adult rated post'))
 	.addBooleanOption(option => option.setName('randomize').setDescription('randomize the search result')),
 	async execute(interaction) {
 		const tags = interaction.options.getString('tags')
