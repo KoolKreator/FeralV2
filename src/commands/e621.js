@@ -14,12 +14,13 @@ module.exports = {
 		const tags = interaction.options.getString('tags')
 		let limit = interaction.options.getNumber('limit')
 		const nsfw = interaction.options.getBoolean('adult')
+		let site_url, rate
 
 		if (nsfw){
-			eurl = "https://e621.net/posts"
+			site_url = "https://e621.net/posts"
 			rate = 'e'
 		} else {
-			eurl = "https://e926.net/posts"
+			site_url = "https://e926.net/posts"
 			rate = 's'
 		}
 
@@ -29,19 +30,20 @@ module.exports = {
 			limit = limit_max
 		}
 
-        const url = `${eurl}.json?tags=${encodeURIComponent(tags)}&rating=${rate}&limit=${limit}`;
+        const url = `${site_url}.json?tags=${encodeURIComponent(tags)}&rating=${rate}&limit=${limit}`;
 		let response = await fetch(url, {
 		    method: "GET",
 		    headers: {
-			"User-Agent": "FeralBot/1.0 (by Kr8tiveKanine on e621)"
+				"User-Agent": "FeralBot/1.0",
+				"Username": "Kr8tiveKanine"
 		    }
 		})
 
 		let result = await response.json();
 
 		if (result['posts'].length > 0){
-			for (const [key, value] of Object.entries(result['posts'])) {
-				await interaction.reply(`Link: \`${eurl}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
+			for (const [, value] of Object.entries(result['posts'])) {
+				await interaction.reply(`Link: \`${site_url}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
 			}
 		}else{
 			await interaction.reply({ content: `Sorry no results found for your query \`${tags}\``})
