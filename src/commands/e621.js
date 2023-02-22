@@ -44,7 +44,7 @@ module.exports = {
 				await interaction.reply(`Link: \`${eurl}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
 			}
 		}else{
-			await interaction.reply({ content: `Sorry no results found for your query "${tags}"`})
+			await interaction.reply({ content: `Sorry no results found for your query \`${tags}\``})
 		}
 	},
 }
