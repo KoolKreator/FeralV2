@@ -35,7 +35,7 @@ module.exports = {
 		})
 
 		for (const [, value] of Object.entries(await await response.json()["posts"])) {
-			interaction.reply(`link: \`${eurl}/posts/${value.id}\`\nrating: \`${value.rating}\`\nscore: \`${value.score.total}\`\n${value.file.url}`)
+			interaction.send(`link: \`${eurl}/posts/${value.id}\`\nrating: \`${value.rating}\`\nscore: \`${value.score.total}\`\n${value.file.url}`)
 		}
 	},
 }
