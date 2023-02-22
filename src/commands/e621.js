@@ -8,8 +8,8 @@ module.exports = {
 	.setDescription('Get posts from e621 or e926.')
 	.addStringOption(option => option.setName('tags').setDescription('Tags to search with').setRequired(true))
     .addNumberOption(option => option.setName('limit').setDescription('Amount of posts to return'))
-    .addBooleanOption(option => option.setName('adult').setDescription('Show adult rated post'))
-	.addBooleanOption(option => option.setName('randomize').setDescription('randomize the search result')),
+    .addBooleanOption(option => option.setName('adult').setDescription('Show adult rated post')),
+	// .addBooleanOption(option => option.setName('randomize').setDescription('randomize the search result')),
 	async execute(interaction) {
 		const tags = interaction.options.getString('tags')
 		let limit = interaction.options.getNumber('limit')
@@ -29,19 +29,29 @@ module.exports = {
 			limit = limit_max
 		}
 
+		function getRandom(min, max) {
+			const floatRandom = Math.random();
+			const difference = max - min;
+			// random between 0 and the difference
+			const random = Math.round(difference * floatRandom);
+			const randomWithinRange = random + min;
+			return randomWithinRange;
+		}
+
         const url = `${eurl}.json?tags=${encodeURIComponent(tags)}&rating=${rate}&limit=${limit}`;
+
 		let response = await fetch(url, {
-		    method: "GET",
-		    headers: {
-			"User-Agent": "FeralBot/1.0 (by Kr8tiveKanine on e621)"
-		    }
-		})
+					method: "GET",
+					headers: {
+					"User-Agent": "FeralBot/2.0 (by Kr8tiveKanine on e621)"
+					}
+				})
 
 		let result = await response.json();
 
-		if (result['posts'].length > 0){
+		if (result['posts'].length > -1){
 			for (const [key, value] of Object.entries(result['posts'])) {
-				await interaction.reply(`Link: \`${eurl}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
+				await interaction.reply(`link: \`${url}/posts/${value.id}\`\nrating: \`${value.rating}\`\nscore: \`${value.score.total}\`\n${value.file.url}`)
 			}
 		}else{
 			await interaction.reply({ content: `Sorry no results found for your query \`${tags}\``})
