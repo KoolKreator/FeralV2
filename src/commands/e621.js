@@ -29,15 +29,6 @@ module.exports = {
 			limit = limit_max
 		}
 
-		function getRandom(min, max) {
-			const floatRandom = Math.random();
-			const difference = max - min;
-			// random between 0 and the difference
-			const random = Math.round(difference * floatRandom);
-			const randomWithinRange = random + min;
-			return randomWithinRange;
-		}
-
         const url = `${eurl}.json?tags=${encodeURIComponent(tags)}&rating=${rate}&limit=${limit}`;
 
 		let response = await fetch(url, {
