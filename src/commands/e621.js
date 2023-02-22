@@ -54,6 +54,10 @@ module.exports = {
 		let result = await response.json();
 
 		if (result['posts'].length > 0){
+			if (randomPost){
+				let valuenum =  getRandom(0,result['posts'].length)
+				let value = result['posts'][valuenum]
+			}
 			for (const [key, value] of Object.entries(result['posts'])) {
 				await interaction.reply(`link: \`${eurl}/${value.id}\`\nrating: \`${value.rating}\`\nscore: \`${value.score.total}\`\n${value.file.url}`)
 			}
