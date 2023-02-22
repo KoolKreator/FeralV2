@@ -30,11 +30,11 @@ module.exports = {
 		}
 
 		if (nsfw){
-			let eurl = "https://e621.net/posts"
-			let rate = 'e'
+			eurl = "https://e621.net/posts"
+			rate = 'e'
 		} else {
-			let eurl = "https://e926.net/posts"
-			let rate = 's'
+			eurl = "https://e926.net/posts"
+			rate = 's'
 		}
 
 		if (limit === null){
