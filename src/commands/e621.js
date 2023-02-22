@@ -43,8 +43,9 @@ module.exports = {
 
 		if (result['posts'].length > 0){
 			for (const [, value] of Object.entries(result['posts'])) {
-				await interaction.reply(`Link: \`${site_url}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
+				await interaction.send(`Link: \`${site_url}/${value.id}\`\nRating: \`${value.rating}\`\nScore: \`${value.score.total}\`\n${value.file.url}`)
 			}
+			interaction.reply("")
 		}else{
 			await interaction.reply({ content: `Sorry no results found for your query \`${tags}\``})
 		}
